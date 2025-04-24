@@ -309,6 +309,10 @@ def before_request():
     """모든 요청 전에 세션 체크"""
     check_session()
 
-# 대신 이렇게 수정
+# Vercel Serverless Function handler
+def handler(request, context):
+    return app
+
+# Local development server
 if __name__ == "__main__":
     app.run(debug=True)
