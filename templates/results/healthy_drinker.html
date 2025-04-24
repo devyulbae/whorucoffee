@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}WhoRUCoffee - 헬시 드링커{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+<style>
+    .result-type {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .result-image {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 2rem;
+        display: block;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .characteristic-card, 
+    .recommendation-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .section-title {
+        margin-bottom: 1rem;
+        color: var(--coffee-dark);
+    }
+    .characteristic-item,
+    .recommendation-item {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: var(--cream);
+        border-radius: 8px;
+    }
+    .action-buttons {
+        margin-top: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<img src="{{ url_for('static', filename='img/types/' + type_info.image) }}" 
+     alt="{{ type_info.type }}" 
+     class="result-image">
+
+<h1 class="result-type">{{ type_info.type }}</h1>
+
+<div class="characteristic-card">
+    <h2 class="section-title">당신의 특징</h2>
+    {% for characteristic in type_info.characteristics %}
+    <div class="characteristic-item">
+        <p>{{ characteristic }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="recommendation-card">
+    <h2 class="section-title">추천사항</h2>
+    {% for recommendation in type_info.recommendations %}
+    <div class="recommendation-item">
+        <p>{{ recommendation }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="action-buttons">
+    <a href="{{ url_for('question') }}" class="btn btn-primary">다시 테스트하기</a>
+</div>
+{% endblock %} 

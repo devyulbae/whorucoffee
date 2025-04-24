@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}WhoRUCoffee - 관리자 통계{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>설문 통계</h1>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>전체 응답 수</h3>
+            <p class="stat-number">{{ total_responses }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>최근 24시간 응답</h3>
+            <p class="stat-number">{{ recent_responses }}</p>
+        </div>
+    </div>
+
+    <div class="type-distribution">
+        <h3>타입별 분포</h3>
+        <div class="distribution-chart">
+            {% for type, count in type_distribution %}
+            <div class="chart-bar">
+                <div class="bar-label">{{ type }}</div>
+                <div class="bar" style="width: {{ (count / total_responses * 100)|round }}%">
+                    <span class="bar-value">{{ count }}명 ({{ (count / total_responses * 100)|round }}%)</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    color: var(--coffee-dark);
+    margin: 0.5rem 0;
+}
+
+.type-distribution {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.chart-bar {
+    margin: 1rem 0;
+}
+
+.bar-label {
+    margin-bottom: 0.5rem;
+    color: var(--coffee-dark);
+}
+
+.bar {
+    background: var(--coffee-medium);
+    color: white;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: width 0.3s ease;
+}
+
+.bar-value {
+    margin-left: 0.5rem;
+}
+</style>
+{% endblock %} 

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}WhoRUCoffee - 테스트{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/question.css') }}">
+<style>
+.recovery-alert {
+    background: var(--cream);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.recovery-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="question-container">
+    <!-- 저장된 답변이 있을 경우 보여줄 복구 알림 -->
+    <div id="recovery-alert" class="recovery-alert" style="display: none;">
+        <p>이전에 저장된 답변이 있습니다. 이어서 진행하시겠습니까?</p>
+        <div class="recovery-actions">
+            <button class="btn btn-primary" onclick="continueProgress()">이어서 진행</button>
+            <button class="btn btn-outline" onclick="startNew()">새로 시작</button>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <!-- 질문 내용은 JS로 동적 삽입됩니다 -->
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <div class="navigation-buttons">
+        <button id="prevBtn" class="btn btn-outline">이전</button>
+        <button id="nextBtn" class="btn btn-primary">다음</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/questions.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/question.js') }}" defer></script>
+{% endblock %} 

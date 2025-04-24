@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}WhoRUCoffee - Error{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">오류가 발생했습니다</h4>
+        <p>{{ error_message }}</p>
+        <hr>
+        <p class="mb-0">
+            <a href="{{ url_for('index') }}" class="alert-link">
+                메인 페이지로 돌아가기
+            </a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-container {
+    max-width: 600px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.error-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.error-card h1 {
+    color: var(--coffee-dark);
+    margin-bottom: 1rem;
+}
+
+.error-card p {
+    color: var(--coffee-medium);
+    margin-bottom: 2rem;
+}
+
+.error-actions {
+    margin-top: 2rem;
+}
+</style>
+{% endblock %} 

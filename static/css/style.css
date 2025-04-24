@@ -1,0 +1,113 @@
+:root {
+  /* Color Palette */
+  --coffee-dark: #4A2C1C;    /* 진한 커피색 */
+  --coffee-medium: #8B593E;  /* 중간 커피색 */
+  --coffee-light: #D4B59E;   /* 연한 커피색 */
+  --cream: #FFF5EA;          /* 크림색 */
+  --accent: #E67E22;         /* 포인트 컬러 */
+  
+  /* Typography */
+  --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--cream);
+  color: var(--coffee-dark);
+  line-height: 1.6;
+}
+
+/* Common Components */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: var(--coffee-dark);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  background-color: var(--coffee-medium);
+}
+
+.btn-outline {
+  border: 2px solid var(--coffee-dark);
+  color: var(--coffee-dark);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background-color: var(--coffee-dark);
+  color: var(--cream);
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-container {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-logo {
+    height: 50px;
+    margin-right: 10px;
+    object-fit: contain;
+} 

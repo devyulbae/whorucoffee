@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}WhoRUCoffee - 결과{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+<style>
+    .result-type {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .characteristic-card, 
+    .recommendation-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .section-title {
+        margin-bottom: 1rem;
+        color: var(--coffee-dark);
+    }
+    .characteristic-item,
+    .recommendation-item {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: var(--cream);
+        border-radius: 8px;
+    }
+    .action-buttons {
+        margin-top: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="question-container">
+    <h1 class="result-type">{{ type }}</h1>
+
+    <div class="characteristic-card">
+        <h2 class="section-title">당신의 특징</h2>
+        <div class="characteristic-item">
+            <p>{{ type_info.consumption_pattern }}</p>
+        </div>
+        <div class="characteristic-item">
+            <p>{{ type_info.coffee_attitude }}</p>
+        </div>
+        <div class="characteristic-item">
+            <p>{{ type_info.lifestyle }}</p>
+        </div>
+    </div>
+
+    <div class="recommendation-card">
+        <h2 class="section-title">추천사항</h2>
+        {% for keyword in type_info.keywords %}
+        <div class="recommendation-item">
+            <p>{{ keyword }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('question') }}" class="btn btn-primary">다시 테스트하기</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "../base.html" %}
+
+{% block title %}WhoRUCoffee - 결과{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+{% endblock %}
+
+{% block extra_head %}
+<!-- html2canvas 라이브러리 추가 -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<style>
+    /* 캡처 영역 스타일 */
+    .capture-area {
+        background: white;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="result-container">
+        <div class="result-header">
+            <div class="result-type-image">
+                <img src="{{ url_for('static', filename='img/types/' + type_info.get('image', 'default.png')) }}" 
+                     alt="{{ type_info.get('type', '') }}">
+            </div>
+            <h1 class="result-type">{{ type_info.get('type', '') }}</h1>
+            <p class="result-subtitle">{{ type_info.get('subtitle', '') }}</p>
+        </div>
+
+        <div class="characteristic-card">
+            <h2 class="section-title">당신의 특징</h2>
+            {% for characteristic in type_info.get('characteristics', []) %}
+            <div class="characteristic-item">
+                <p>{{ characteristic }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="characteristic-card">
+            <h2 class="section-title">추천사항</h2>
+            {% for recommendation in type_info.get('recommendations', []) %}
+            <div class="recommendation-item">
+                <p>{{ recommendation }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="action-buttons">
+            <a href="{{ url_for('question') }}" class="btn btn-primary">다시 테스트하기</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

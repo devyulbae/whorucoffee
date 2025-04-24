@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}WhoRUCoffee - 나의 커피 성향 테스트{% endblock %}
+
+{% block extra_css %}
+<style>
+    .landing-container {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    .title {
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitle {
+        color: var(--text-color);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+        word-break: keep-all;
+    }
+
+    .start-button {
+        width: 100%;
+        max-width: 300px;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="landing-container">
+    <h1 class="title">
+        당신만의<br>
+        특별한 커피 이야기
+    </h1>
+    
+    <p class="subtitle">
+        간단한 질문으로<br>
+        나만의 커피 취향을 발견해보세요
+    </p>
+
+    <div class="text-center">
+        <a href="{{ url_for('question') }}" class="btn btn-primary start-button">
+            테스트 시작하기
+        </a>
+    </div>
+</div>
+{% endblock %} 

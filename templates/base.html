@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WhoRUCoffee{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            touch-action: manipulation;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            padding: 0 1rem;
+        }
+        .navbar {
+            border: none;
+            background: none !important;
+            padding: 1.5rem 0;
+            box-shadow: none;
+            text-align: center;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto;
+        }
+        .navbar-brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                width: 40px;
+                height: 40px;
+            }
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+        }
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 12px;
+        }
+        .container-fluid {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .question-title, 
+        .text-muted,
+        .option-button {
+            text-align: center;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="mobile-container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" 
+                         alt="WhoRUCoffee Logo" 
+                         style="height: 50px; margin-right: 10px;">
+                    Who R U Coffee
+                </a>
+            </div>
+        </nav>
+
+        <main class="mobile-container">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

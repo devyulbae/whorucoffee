@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}WhoRUCoffee - 프리미엄 탐험가{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+{% endblock %}
+
+{% block content %}
+{# 이미지 경로를 types/ 디렉토리로 수정 #}
+<img src="{{ url_for('static', filename='img/types/' + type_info.image) }}" 
+     alt="{{ type_info.type }}" 
+     class="result-image">
+
+<h1 class="result-type">{{ type_info.type }}</h1>
+
+<div class="characteristic-card">
+    <h2 class="section-title">당신의 특징</h2>
+    {% for characteristic in type_info.characteristics %}
+    <div class="characteristic-item">
+        <p>{{ characteristic }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="recommendation-card">
+    <h2 class="section-title">추천사항</h2>
+    {% for recommendation in type_info.recommendations %}
+    <div class="recommendation-item">
+        <p>{{ recommendation }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="action-buttons">
+    <a href="{{ url_for('question') }}" class="btn btn-primary">다시 테스트하기</a>
+</div>
+{% endblock %} 
