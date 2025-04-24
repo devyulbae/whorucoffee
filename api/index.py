@@ -1,22 +1,10 @@
-from flask import (
-    Flask,
-    render_template,
-    request,
-    jsonify,
-    url_for,
-    redirect,
-    session,
-    flash,
-)
+from flask import Flask, render_template, request, jsonify
 import os
 import json
 import logging
-from datetime import datetime, timezone
-from functools import wraps
 from dotenv import load_dotenv
 from prompts.coffee_personality_prompt import COFFEE_TYPES
 from utils.llm_handler import analyze_coffee_personality
-from utils.security import verify_password
 
 # 로깅 설정
 logging.basicConfig(level=logging.ERROR)
