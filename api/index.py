@@ -19,13 +19,13 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 # Flask 앱 생성
-app = Flask(__name__, 
+flask_app = Flask(__name__, 
     static_folder='../static',    
     template_folder='../templates'
 )
 
 # 기본 설정
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
+flask_app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
 
 # 유형 이름 매핑
 TYPE_MAPPING = {
@@ -39,7 +39,7 @@ TYPE_MAPPING = {
     '라이트 컨슈머': 'light_consumer'
 }
 
-@app.route('/')
+@flask_app.route('/')
 def index():
     try:
         return render_template('index.html')
@@ -47,11 +47,11 @@ def index():
         logger.error(f"Error in index route: {e}")
         return jsonify(error=str(e)), 500
 
-@app.route('/question')
+@flask_app.route('/question')
 def question():
     return render_template("question.html")
 
-@app.route('/analyze', methods=['POST'])
+@flask_app.route('/analyze', methods=['POST'])
 def analyze():
     try:
         answers = request.form.get('answers')
@@ -82,7 +82,7 @@ def analyze():
         return render_template('error.html', 
                            error_message=f"결과를 처리하는 중 오류가 발생했습니다: {str(e)}")
 
-@app.route('/result')
+@flask_app.route('/result')
 def result():
     type_name = request.args.get("type", "진성 한국인")
     template = f"results/{TYPE_MAPPING.get(type_name, 'korean_authentic')}.html"
@@ -90,8 +90,8 @@ def result():
 
 # Vercel Serverless Function handler
 def app(environ, start_response):
-    return app.wsgi_app(environ, start_response)
+    return flask_app(environ, start_response)
 
 # Local development server
 if __name__ == "__main__":
-    app.run(debug=True)
+    flask_app.run(debug=True)
