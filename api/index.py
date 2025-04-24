@@ -1,5 +1,10 @@
-from flask import Flask, render_template, request, jsonify
 import os
+import sys
+
+# 상위 디렉토리를 Python 경로에 추가
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from flask import Flask, render_template, request, jsonify
 import json
 import logging
 from dotenv import load_dotenv
