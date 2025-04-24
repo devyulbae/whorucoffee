@@ -37,9 +37,9 @@ app = Flask(__name__,
     template_folder='../templates' # 상대 경로 수정
 )
 
-# 설정
+# DB 설정
 app.config.update({
-    'SQLALCHEMY_DATABASE_URI': 'sqlite:///whorucoffee.db',
+    'SQLALCHEMY_DATABASE_URI': os.getenv('DATABASE_URL', 'sqlite:///whorucoffee.db'),
     'SQLALCHEMY_TRACK_MODIFICATIONS': False,
     'SECRET_KEY': os.getenv('SECRET_KEY', 'default-secret-key')
 })
@@ -47,9 +47,10 @@ app.config.update({
 # DB 초기화
 db.init_app(app)
 
-# DB 테이블 생성
-with app.app_context():
-    db.create_all()
+# 로컬 환경에서만 DB 생성
+if not os.getenv('VERCEL_ENV'):
+    with app.app_context():
+        db.create_all()
 
 def admin_required(f):
     @wraps(f)
@@ -310,8 +311,8 @@ def before_request():
     check_session()
 
 # Vercel Serverless Function handler
-def handler(request, context):
-    return app
+def app(request):
+    return app.wsgi_app(request.environ, request.start_response)
 
 # Local development server
 if __name__ == "__main__":
