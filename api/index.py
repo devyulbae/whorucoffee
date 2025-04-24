@@ -89,12 +89,8 @@ def result():
     return render_template(template, type_info=COFFEE_TYPES[type_name], type=type_name)
 
 # Vercel Serverless Function handler
-def handler(environ, start_response):
+def app(environ, start_response):
     return app.wsgi_app(environ, start_response)
-
-# Flask app을 Vercel이 인식할 수 있게 export
-app.debug = True
-application = app
 
 # Local development server
 if __name__ == "__main__":
