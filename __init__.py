@@ -23,21 +23,11 @@ def create_app(test_config=None):
     if test_config:
         app.config.update(test_config)
 
-    # SQLAlchemy 초기화
-    db.init_app(app)
-
     # Blueprint 등록
     from .api.index import bp
     app.register_blueprint(bp)
-
-    # 데이터베이스 생성
-    with app.app_context():
-        db.create_all()
-
-    return app
-
 # 기본 앱 생성
 app = create_app()
 
 # 다른 모듈에서 사용할 수 있도록 export
-__all__ = ["app", "db"]
+__all__ = ["app"]
