@@ -33,16 +33,15 @@ load_dotenv()
 
 # Flask 앱 생성 - 템플릿과 정적 파일 경로 설정
 app = Flask(__name__, 
-    template_folder='../templates',
-    static_folder='../static',  # 정적 파일 경로 추가
-    static_url_path='/static'   # URL 경로 설정
+    static_folder='../static',    # 상대 경로 수정
+    template_folder='../templates' # 상대 경로 수정
 )
 
 # 설정
 app.config.update({
     'SQLALCHEMY_DATABASE_URI': 'sqlite:///whorucoffee.db',
     'SQLALCHEMY_TRACK_MODIFICATIONS': False,
-    'SECRET_KEY': 'dev'
+    'SECRET_KEY': os.getenv('SECRET_KEY', 'default-secret-key')
 })
 
 # DB 초기화
@@ -71,7 +70,11 @@ def admin_required(f):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    try:
+        return render_template('index.html')
+    except Exception as e:
+        print(f"Error in index route: {e}")
+        return jsonify(error=str(e)), 500
 
 @app.route('/question')
 def question():
@@ -306,5 +309,6 @@ def before_request():
     """모든 요청 전에 세션 체크"""
     check_session()
 
+# 대신 이렇게 수정
 if __name__ == "__main__":
     app.run(debug=True)
